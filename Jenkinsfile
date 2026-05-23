@@ -14,5 +14,11 @@ pipeline {
                 bat 'docker build -t my-app .'
             }
         }
+
+        stage('Test') {
+            steps {
+                bat 'python -m unittest'
+            }
+        }
     }
 }
