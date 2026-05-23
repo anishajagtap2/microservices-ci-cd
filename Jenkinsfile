@@ -21,5 +21,11 @@ pipeline {
                 bat '"C:\\Users\\DDR\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m unittest'
             }
         }
+        stage('Push') {
+            steps {
+                bat 'docker build -t anisha1099/my-app:$8.'
+                bat 'docker push anisha1099/my-app:$8'
+            }
+}
     }
 }
