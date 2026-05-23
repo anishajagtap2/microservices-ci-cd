@@ -17,7 +17,8 @@ pipeline {
 
         stage('Test') {
             steps {
-                bat 'py -m unittest'
+                //bat 'py -m unittest'
+                bat '"C:\\Users\\DDR\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m unittest'
             }
         }
     }
