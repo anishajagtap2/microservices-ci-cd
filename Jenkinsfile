@@ -29,8 +29,8 @@ pipeline {
 
         stage('Push') {
             steps {
-                bat 'docker build -t anishajagtap2/my-app:%BUILD_NUMBER% .'
-                bat 'docker push anishajagtap2/my-app:%BUILD_NUMBER%'
+                bat 'docker build -t anisha1099/my-app:%BUILD_NUMBER% .'
+                bat 'docker push anisha1099/my-app:%BUILD_NUMBER%'
             }
         }
     }
