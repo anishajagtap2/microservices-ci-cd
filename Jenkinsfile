@@ -47,18 +47,18 @@ pipeline {
             }
         }
 
+        stage('Build') {
+            steps {
+                bat 'docker build -t anisha1099/my-app:%BUILD_NUMBER% .'
+            }
+        }
+
         // stage('Build') {
         //     steps {
-        //         bat 'docker build -t anisha1099/my-app:%BUILD_NUMBER% .'
+        //         bat 'docker build -t my-app .'
         //     }
         // }
 
-        stage('Build') {
-            steps {
-                bat 'docker build -t my-app .'
-            }
-        }
-        
         stage('Test') {
             steps {
                 bat '"C:\\Users\\DDR\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m unittest'
