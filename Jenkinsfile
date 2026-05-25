@@ -70,5 +70,22 @@ pipeline {
                 bat 'docker push anisha1099/my-app:%BUILD_NUMBER%'
             }
         }
+
+        stage('Deploy') {
+            steps {
+                bat '''
+                kubectl set image deployment/my-app \
+                my-app=anisha1099/my-app:$BUILD_NUMBER
+                '''
+            }
+        }
+
+
+        try {
+            sh 'kubectl apply -f deployment.yaml'
+        }
+        catch(Exception e) {
+            sh 'kubectl rollout undo deployment/my-app'
+        }
     }
 }
