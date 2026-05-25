@@ -21,14 +21,11 @@ pipeline {
                 bat '"C:\\Users\\DDR\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m unittest'
             }
         }
-<<<<<<< HEAD
         stage('Push') {
             steps {
-                 sh 'docker build -t anishajagtap2/my-app:$8 .'
-                sh 'docker push anishajagtap2/my-app:$8'
+                bat 'docker build -t anishajagtap2/my-app:$8 .'
+                bat 'docker push anishajagtap2/my-app:$8'
     }
 }
-=======
->>>>>>> d281069cc81111fe5425b1d7bd5d105f70852724
     }
 }
