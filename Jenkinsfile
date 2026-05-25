@@ -33,6 +33,6 @@ pipeline {
                 bat 'docker push anishajagtap2/my-app:%BUILD_NUMBER%'
             }
         }
-}
     }
 }
+
