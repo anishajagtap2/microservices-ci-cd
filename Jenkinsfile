@@ -23,8 +23,8 @@ pipeline {
         }
         stage('Push') {
             steps {
-                bat 'docker build -t anishajagtap2/my-app:$8 .'
-                bat 'docker push anishajagtap2/my-app:$8'
+                bat 'docker build -t anishajagtap2/my-app:%8% .'
+                bat 'docker push anishajagtap2/my-app:%8%'
     }
 }
     }
