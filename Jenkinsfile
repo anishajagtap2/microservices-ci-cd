@@ -21,6 +21,5 @@ pipeline {
                 bat '"C:\\Users\\DDR\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m unittest'
             }
         }
-}
     }
 }
