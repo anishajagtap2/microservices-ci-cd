@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Clone') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat 'docker build -t anisha1099/user-service:%BUILD_NUMBER% .'
+            }
+        }
+
+        stage('Push') {
+            steps {
+
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+
+                    bat 'docker login -u %DOCKER_USER% -p %DOCKER_PASS%'
+
+                    bat 'docker push anisha1099/user-service:%BUILD_NUMBER%'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                bat 'kubectl set image deployment/user-service user-service=anisha1099/user-service:%BUILD_NUMBER%'
+            }
+        }
+    }
+}
