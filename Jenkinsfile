@@ -71,15 +71,30 @@ pipeline {
         //     }
         // }
 
+        // stage('Push') {
+        //     steps {
+        //         script {
+        //             try {
+        //                 bat 'docker push anisha1099/my-app:%BUILD_NUMBER%'
+        //             }
+        //             catch(Exception e) {
+        //                 echo 'Push failed'
+        //             }
+        //         }
+        //     }
+        // }
+
         stage('Push') {
             steps {
-                script {
-                    try {
-                        bat 'docker push anisha1099/my-app:%BUILD_NUMBER%'
-                    }
-                    catch(Exception e) {
-                        echo 'Push failed'
-                    }
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+
+                    bat 'docker login -u %DOCKER_USER% -p %DOCKER_PASS%'
+
+                    bat 'docker push anisha1099/my-app:%BUILD_NUMBER%'
                 }
             }
         }
