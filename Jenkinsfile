@@ -65,27 +65,32 @@ pipeline {
             }
         }
 
+        // stage('Push') {
+        //     steps {
+        //         bat 'docker push anisha1099/my-app:%BUILD_NUMBER%'
+        //     }
+        // }
+
         stage('Push') {
             steps {
-                bat 'docker push anisha1099/my-app:%BUILD_NUMBER%'
+                script {
+                    try {
+                        bat 'docker push anisha1099/my-app:%BUILD_NUMBER%'
+                    }
+                    catch(Exception e) {
+                        echo 'Push failed'
+                    }
+                }
             }
         }
 
-        stage('Deploy') {
-            steps {
-                bat '''
-                kubectl set image deployment/my-app \
-                my-app=anisha1099/my-app:$BUILD_NUMBER
-                '''
-            }
-        }
-
-
-        try {
-            sh 'kubectl apply -f deployment.yaml'
-        }
-        catch(Exception e) {
-            sh 'kubectl rollout undo deployment/my-app'
-        }
+        // stage('Deploy') {
+        //     steps {
+        //         bat '''
+        //         kubectl set image deployment/my-app \
+        //         my-app=anisha1099/my-app:$BUILD_NUMBER
+        //         '''
+        //     }
+        // }
     }
 }
