@@ -107,5 +107,11 @@ pipeline {
         //         '''
         //     }
         // }
+
+        stage('Deploy') {
+            steps {
+                bat 'kubectl set image deployment/my-app my-app=anisha1099/my-app:%BUILD_NUMBER%'
+            }
+        }
     }
 }
